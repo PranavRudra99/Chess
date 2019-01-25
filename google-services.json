@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "27973870235",
+    "firebase_url": "https://chess-6cb02.firebaseio.com",
+    "project_id": "chess-6cb02",
+    "storage_bucket": "chess-6cb02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27973870235:android:81c05f9d9e8a4406",
+        "android_client_info": {
+          "package_name": "com.example.prana.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27973870235-e464p9dj3l3bohanr5kojn8lrviin7vr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.prana.project",
+            "certificate_hash": "acf44e659e47fdfe15ac6510dabe91ca3bd5a6fa"
+          }
+        },
+        {
+          "client_id": "27973870235-u8a25a20t3ddqa20h8smav96oofvqqll.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8HV4dyxd57aCuSIh75m6_QzVCY-QaoVM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27973870235-u8a25a20t3ddqa20h8smav96oofvqqll.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

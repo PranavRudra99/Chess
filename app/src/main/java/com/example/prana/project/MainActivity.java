@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void abc()
     {
-     Button b=findViewById(R.id.b);
-    b.setOnClickListener(new View.OnClickListener() {
+    Button b1=findViewById(R.id.b1);
+    b1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             ProgressBar pb=findViewById(R.id.pb);
@@ -27,6 +27,16 @@ public class MainActivity extends AppCompatActivity {
             Intent i=new Intent(getApplicationContext(),B.class);
             startActivity(i);
         }
+    });
+    Button b2=findViewById(R.id.b2);
+    b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             ProgressBar pb=findViewById(R.id.pb);
+             pb.setVisibility(View.VISIBLE);
+             Intent i=new Intent(getApplicationContext(),F.class);
+             startActivity(i);
+            }
     });
     Button ex=findViewById(R.id.ex);
         ex.setOnClickListener(new View.OnClickListener() {

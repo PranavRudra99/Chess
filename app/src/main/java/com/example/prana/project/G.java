@@ -13,13 +13,31 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.Build;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class C extends View {
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class G extends View
+{
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference ref = database.getReference();
+    final Data obj = new Data();
+    M ob=new M();
+
     Context c=getContext();
     DisplayMetrics x = new DisplayMetrics();
     Paint p = new Paint();
@@ -30,8 +48,8 @@ public class C extends View {
     int switcher=0,aqc=1,aknc=2,arc=2,abc=2,bqc=1,bknc=2,brc=2,bbc=2;//count of pieces pawn can become queen,rook,bishop,knight
     int x_val=-1;//position of pawn that reaches other end
     int select = -1;
-    int is_a_pawn,is_a_king,is_a_queen,is_a_knight,is_a_rook,is_a_bishop;
-    int is_b_pawn,is_b_king,is_b_queen,is_b_knight,is_b_rook,is_b_bishop;
+    int is_a_pawn,is_a_king,is_a_queen,is_a_knight,is_a_rook,is_a_bishop,is_a=0;
+    int is_b_pawn,is_b_king,is_b_queen,is_b_knight,is_b_rook,is_b_bishop,is_b=0;
     int apawn[][] = new int[8][6];
     int bpawn[][] = new int[8][6];
     int occupied_a[][] = new int[8][8];
@@ -141,6 +159,15 @@ public class C extends View {
      *              else returns false
      * */
 
+    public Handler handler = new Handler();
+    public Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            read();
+            invalidate();
+            handler.postDelayed(this, 50);
+        }
+    };
     public void init() {
         p.setColor(Color.YELLOW);
         p1.setColor(Color.GREEN);
@@ -333,9 +360,347 @@ public class C extends View {
             bqueen[i][2]=-1;
             bqueen[i][4]=-1;
         }
+
+        write();
+        handler.postDelayed(runnable, 100);
+    }
+    public void read()
+    {
+
+        ref.child("m").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ob.m= Integer.parseInt(dataSnapshot.child("m").getValue().toString());
+                m=ob.getM();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+        ref.child("apawn").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        apawn[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("bpawn").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        bpawn[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("arook").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        arook[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("brook").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        brook[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("aknight").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        aknight[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("bknight").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        bknight[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("abishop").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        abishop[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("bbishop").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        bbishop[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("aqueen").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        aqueen[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("bqueen").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 10; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        bqueen[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("aking").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int j = 0; j < 5; j++) {
+                    aking[j] = Integer.parseInt(String.valueOf(obj.data.get(j + " ")));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("bking").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int j = 0; j < 5; j++) {
+                    bking[j] = Integer.parseInt(String.valueOf(obj.data.get(j + " ")));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("occupied_a").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        occupied_a[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+        ref.child("occupied_b").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
+                for (int i = 0; i < 8; i++) {
+                    for (int j = 0; j < 8; j++) {
+                        occupied_b[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
-    public C(Context context) {
+    public void write() {
+        HashMap<String, Integer> hm = new HashMap<String, Integer>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                hm.put(i + " " + j, apawn[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("apawn").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 5; j++) {
+                hm.put(i + " " + j, bpawn[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("bpawn").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 5; j++) {
+                hm.put(i + " " + j, arook[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("arook").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 5; j++) {
+                hm.put(i + " " + j, brook[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("brook").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                hm.put(i + " " + j, abishop[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("abishop").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                hm.put(i + " " + j, bbishop[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("bbishop").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                hm.put(i + " " + j, aknight[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("aknight").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                hm.put(i + " " + j, bknight[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("bknight").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                hm.put(i + " " + j, aqueen[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("aqueen").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
+                hm.put(i + " " + j, bqueen[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("bqueen").setValue(obj);
+        hm.clear();
+        for (int j = 0; j < 5; j++) {
+            hm.put(j + " ", aking[j]);
+        }
+        obj.setData(hm);
+        ref.child("aking").setValue(obj);
+        hm.clear();
+        for (int j = 0; j < 5; j++) {
+            hm.put(j + " ", bking[j]);
+        }
+        obj.setData(hm);
+        ref.child("bking").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                hm.put(i + " " + j, occupied_a[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("occupied_a").setValue(obj);
+        hm.clear();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                hm.put(i + " " + j, occupied_b[i][j]);
+            }
+        }
+        obj.setData(hm);
+        ref.child("occupied_b").setValue(obj);
+        hm.clear();
+        obj.data.clear();
+        ob.setM((int) m);
+        ref.child("m").setValue(ob);
+    }
+    public G(Context context) {
         super(context);
         init();
     }
@@ -695,41 +1060,51 @@ public class C extends View {
                     {
                         px = i;
                         py = j;
-                        if(m%4==0)
+                        if(m%4==0 && is_b==0)
                         {
                             if (occupied_a[px - 1][py - 1] != 0)
                             {
                                 modulo_0();
+                                write();
                             }
                         }
-                        else if(m%4==1)
+                        else if(m%4==1 && is_a==1 && is_b==0)
                         {
                             if(occupied_a[px-1][py-1]!=0)
                             {
                                 m--;
+                                ob.setM((int) m);
+                                ref.child("m").setValue(ob);
                                 modulo_0();
+                                write();
                             }
                             if(occupied_a[px-1][py-1]==0)
                             {
                                 modulo_1();
+                                write();
                             }
                         }
-                        else if(m%4==2) {
+                        else if(m%4==2 && is_a==0) {
                             if (occupied_b[px - 1][py - 1] != 0)
                             {
                                 modulo_2();
+                                write();
                             }
                         }
-                        else if(m%4==3)
+                        else if(m%4==3 && is_b==1 && is_a==0)
                         {
                             if(occupied_b[px-1][py-1]!=0)
                             {
                                 m--;
+                                ob.setM((int) m);
+                                ref.child("m").setValue(ob);
                                 modulo_2();
+                                write();
                             }
                             if(occupied_b[px-1][py-1]==0)
                             {
                                 modulo_3();
+                                write();
                             }
                         }
                     }
@@ -833,6 +1208,9 @@ public class C extends View {
         }
         if (is_a_knight == 1 || is_a_rook == 1 || is_a_bishop == 1 || is_a_queen == 1 || is_a_king == 1 || is_a_pawn == 1) {
             m++;
+            is_a=1;
+            ob.setM((int) m);
+            ref.child("m").setValue(ob);
             px1 = px;
             py1 = py;
         }
@@ -844,34 +1222,42 @@ public class C extends View {
             if(apawn[k][3]==1)
             {
                 a_pawn(k);
+                apawn[k][3]=0;
             }
         }
         if(aking[3]==1)
         {
             a_king();
+            aking[3]=0;
         }
         for(int k=0;k<10;k++)
         {
             if(abishop[k][3]==1)
             {
                 a_bishop(k);
+                abishop[k][3]=0;
             }
             if(arook[k][3]==1)
             {
                 a_rook(k);
+                arook[k][3]=0;
             }
             if(aknight[k][3]==1)
             {
                 a_knight(k);
+                aknight[k][3]=0;
             }
             if(aqueen[k][3]==1)
             {
                 a_queen(k);
+                aqueen[k][3]=0;
             }
         }
         if(is_a_knight==-1||is_a_rook==-1||is_a_bishop==-1||is_a_queen==-1||is_a_king==-1||is_a_pawn==-1)
         {
             m++;
+            ob.setM((int) m);
+            ref.child("m").setValue(ob);
             occupied_a[px-1][py-1]=1;
             occupied_b[px-1][py-1]=0;
             occupied_a[px1-1][py1-1]=0;
@@ -963,6 +1349,9 @@ public class C extends View {
         }
         if (is_b_knight == 1 || is_b_rook == 1 || is_b_bishop == 1 || is_b_queen == 1 || is_b_king == 1 || is_b_pawn == 1) {
             m++;
+            is_b=1;
+            ob.setM((int) m);
+            ref.child("m").setValue(ob);
             px1 = px;
             py1 = py;
         }
@@ -974,209 +1363,216 @@ public class C extends View {
             if(bpawn[k][3]==1)
             {
                 b_pawn(k);
+                bpawn[k][3]=0;
             }
         }
         if(bking[3]==1)
         {
             b_king();
+            bking[3]=0;
         }
         for(int k=0;k<10;k++)
         {
             if(bbishop[k][3]==1)
             {
                 b_bishop(k);
+                bbishop[k][3]=0;
             }
 
             if(brook[k][3]==1)
             {
                 b_rook(k);
+                brook[k][3]=0;
             }
             if(bknight[k][3]==1)
             {
                 b_knight(k);
+                bknight[k][3]=0;
             }
             if(bqueen[k][3]==1)
             {
                 b_queen(k);
+                bqueen[k][3]=0;
             }
         }
         if(is_b_knight==-1||is_b_rook==-1||is_b_bishop==-1||is_b_queen==-1||is_b_king==-1||is_b_pawn==-1)
         {
             m++;
+            ob.setM((int) m);
+            ref.child("m").setValue(ob);
             occupied_b[px-1][py-1]=1;
             occupied_a[px-1][py-1]=0;
             occupied_b[px1-1][py1-1]=0;
         }
-    }
-    public void a_pawn(int k) {
-        if(apawn[k][2]==0) {
-            pawn_a_count[k]=0;
-            set();
-            int z=-1;
-            if(a_check(aking[0],aking[1])==1)
-            {
+    }public void a_pawn(int k) {
+    if(apawn[k][2]==0) {
+        pawn_a_count[k]=0;
+        set();
+        int z=-1;
+        if(a_check(aking[0],aking[1])==1)
+        {
 
-                int x = apawn[k][0];
-                int y = apawn[k][1];
-                if (x>0&&y>1&&occupied_a[x - 1][y - 2] == 0 && occupied_b[x - 1][y - 2] == 0) {
-                    occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
-                    apawn[k][0]=x;
-                    apawn[k][1]=y-1;
-                    occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
-                    if(a_check(aking[0],aking[1])==1)
-                    {
-                        pawn_a_moves[k][pawn_a_count[k]][0] = x;
-                        pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
-                        pawn_a_count[k]++;
-                    }
-                    re_set();
-                    if (apawn[k][4] == 0) {
-                        if (x>=1&&y>2&&occupied_a[x - 1][y - 3] == 0 && occupied_b[x - 1][y - 3] == 0) {
-                            occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
-                            apawn[k][0]=x;
-                            apawn[k][1]=y-2;
-                            occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
-                            if(a_check(aking[0],aking[1])==1)
-                            {
-                                pawn_a_moves[k][pawn_a_count[k]][0] = x;
-                                pawn_a_moves[k][pawn_a_count[k]][1] = y - 2;
-                                pawn_a_count[k]++;
-                            }
-                            re_set();
-                        }
-                    }
-                }
-                //en passant
-                if (x < 8 && y > 0 && occupied_b[x][y - 1] == 1) {
-                    for (int i = 0; i < 8; i++) {
-                        if (bpawn[i][0] == x + 1 && bpawn[i][1] == y && bpawn[i][4] == 1) {
-                            occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
-                            apawn[k][0]=x+1;
-                            apawn[k][1]=y-1;
-                            bpawn[i][2]=-1;
-                            occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
-                            if(a_check(aking[0],aking[1])==1)
-                            {
-                                pawn_a_moves[k][pawn_a_count[k]][0] = x + 1;
-                                pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
-                                pawn_a_moves[k][pawn_a_count[k]][2] = 1;
-                                pawn_a_count[k]++;
-                                z=1;
-                            }
-                            re_set();
-                        }
-                    }
-                }
-                if (x > 1 && y > 0 && occupied_b[x - 2][y - 1] == 1) {
-                    for (int i = 0; i < 8; i++) {
-                        if (bpawn[i][0] == x - 1 && bpawn[i][1] == y && bpawn[i][4] == 1) {
-                            occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
-                            apawn[k][0]=x-1;
-                            apawn[k][1]=y-1;
-                            bpawn[i][2]=-1;
-                            occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
-                            if(a_check(aking[0],aking[1])==1)
-                            {
-                                pawn_a_moves[k][pawn_a_count[k]][0] = x - 1;
-                                pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
-                                pawn_a_moves[k][pawn_a_count[k]][2] = 1;
-                                pawn_a_count[k]++;
-                                z=2;
-                            }
-                            re_set();
-                        }
-                    }
-                }
-                //end
-                if (x < 8 && occupied_b[x][y - 2] == 1) {
-                    occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
-                    apawn[k][0]=x+1;
-                    apawn[k][1]=y-1;
-                    a_kill_b(x+1,y-1);
-                    occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
-                    if(a_check(aking[0],aking[1])==1)
-                    {
-                        pawn_a_moves[k][pawn_a_count[k]][0] = x + 1;
-                        pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
-                        pawn_a_count[k]++;
-                    }
-                    re_set();
-                }
-                if (x > 1 && occupied_b[x - 2][y - 2] == 1) {
-                    occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
-                    apawn[k][0]=x-1;
-                    apawn[k][1]=y-1;
-                    a_kill_b(x-1,y-1);
-                    occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
-                    if(a_check(aking[0],aking[1])==1)
-                    {
-                        pawn_a_moves[k][pawn_a_count[k]][0] = x - 1;
-                        pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
-                        pawn_a_count[k]++;
-                    }
-                    re_set();
-                }
-                for(int i=0;i<pawn_a_count[k];i++)
+            int x = apawn[k][0];
+            int y = apawn[k][1];
+            if (x>0&&y>1&&occupied_a[x - 1][y - 2] == 0 && occupied_b[x - 1][y - 2] == 0) {
+                occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
+                apawn[k][0]=x;
+                apawn[k][1]=y-1;
+                occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
+                if(a_check(aking[0],aking[1])==1)
                 {
-                    if(z_val==0 && px == pawn_a_moves[k][i][0] && py == pawn_a_moves[k][i][1])
-                    {
-                        apawn[k][0]=px;
-                        apawn[k][1]=py;
-                        is_a_pawn = -1;
-                        if(py1-py==2)
+                    pawn_a_moves[k][pawn_a_count[k]][0] = x;
+                    pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
+                    pawn_a_count[k]++;
+                }
+                re_set();
+                if (apawn[k][4] == 0) {
+                    if (x>=1&&y>2&&occupied_a[x - 1][y - 3] == 0 && occupied_b[x - 1][y - 3] == 0) {
+                        occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
+                        apawn[k][0]=x;
+                        apawn[k][1]=y-2;
+                        occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
+                        if(a_check(aking[0],aking[1])==1)
                         {
-                            apawn[k][4]=1;
+                            pawn_a_moves[k][pawn_a_count[k]][0] = x;
+                            pawn_a_moves[k][pawn_a_count[k]][1] = y - 2;
+                            pawn_a_count[k]++;
                         }
-                        if(py1-py==1)
-                        {
-                            apawn[k][4]=-1;
-                        }
-                        a_kill_b(px,py);
-                        occupied_a[px-1][py-1]=1;
-                        if(px-py==px1-py1||px+py==px1+py1)
-                        {
-                            if (z == 1) {
-                                a_kill_b(x + 1, y);//capture
-                                z = -1;
-                            }
-                            if (z == 2) {
-                                a_kill_b(x - 1, y);//capture
-                                z = -1;
-                            }
-                        }
+                        re_set();
                     }
                 }
             }
-            else
+            //en passant
+            if (x < 8 && y > 0 && occupied_b[x][y - 1] == 1) {
+                for (int i = 0; i < 8; i++) {
+                    if (bpawn[i][0] == x + 1 && bpawn[i][1] == y && bpawn[i][4] == 1) {
+                        occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
+                        apawn[k][0]=x+1;
+                        apawn[k][1]=y-1;
+                        bpawn[i][2]=-1;
+                        occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
+                        if(a_check(aking[0],aking[1])==1)
+                        {
+                            pawn_a_moves[k][pawn_a_count[k]][0] = x + 1;
+                            pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
+                            pawn_a_moves[k][pawn_a_count[k]][2] = 1;
+                            pawn_a_count[k]++;
+                            z=1;
+                        }
+                        re_set();
+                    }
+                }
+            }
+            if (x > 1 && y > 0 && occupied_b[x - 2][y - 1] == 1) {
+                for (int i = 0; i < 8; i++) {
+                    if (bpawn[i][0] == x - 1 && bpawn[i][1] == y && bpawn[i][4] == 1) {
+                        occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
+                        apawn[k][0]=x-1;
+                        apawn[k][1]=y-1;
+                        bpawn[i][2]=-1;
+                        occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
+                        if(a_check(aking[0],aking[1])==1)
+                        {
+                            pawn_a_moves[k][pawn_a_count[k]][0] = x - 1;
+                            pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
+                            pawn_a_moves[k][pawn_a_count[k]][2] = 1;
+                            pawn_a_count[k]++;
+                            z=2;
+                        }
+                        re_set();
+                    }
+                }
+            }
+            //end
+            if (x < 8 && occupied_b[x][y - 2] == 1) {
+                occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
+                apawn[k][0]=x+1;
+                apawn[k][1]=y-1;
+                a_kill_b(x+1,y-1);
+                occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
+                if(a_check(aking[0],aking[1])==1)
+                {
+                    pawn_a_moves[k][pawn_a_count[k]][0] = x + 1;
+                    pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
+                    pawn_a_count[k]++;
+                }
+                re_set();
+            }
+            if (x > 1 && occupied_b[x - 2][y - 2] == 1) {
+                occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
+                apawn[k][0]=x-1;
+                apawn[k][1]=y-1;
+                a_kill_b(x-1,y-1);
+                occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
+                if(a_check(aking[0],aking[1])==1)
+                {
+                    pawn_a_moves[k][pawn_a_count[k]][0] = x - 1;
+                    pawn_a_moves[k][pawn_a_count[k]][1] = y - 1;
+                    pawn_a_count[k]++;
+                }
+                re_set();
+            }
+            for(int i=0;i<pawn_a_count[k];i++)
             {
-                for(int i=0;i<a_pawn_count[k];i++)
+                if(z_val==0 && px == pawn_a_moves[k][i][0] && py == pawn_a_moves[k][i][1])
                 {
-                    if(px == a_pawn_moves[k][i][0] && py == a_pawn_moves[k][i][1])
+                    apawn[k][0]=px;
+                    apawn[k][1]=py;
+                    is_a_pawn = -1;
+                    if(py1-py==2)
                     {
-                        apawn[k][0]=px;
-                        apawn[k][1]=py;
-                        if(py1-py==2)
-                        {
-                            apawn[k][4]=1;
+                        apawn[k][4]=1;
+                    }
+                    if(py1-py==1)
+                    {
+                        apawn[k][4]=-1;
+                    }
+                    a_kill_b(px,py);
+                    occupied_a[px-1][py-1]=1;
+                    if(px-py==px1-py1||px+py==px1+py1)
+                    {
+                        if (z == 1) {
+                            a_kill_b(x + 1, y);//capture
+                            z = -1;
                         }
-                        if(py1-py==1)
-                        {
-                            apawn[k][4]=-1;
+                        if (z == 2) {
+                            a_kill_b(x - 1, y);//capture
+                            z = -1;
                         }
-                        is_a_pawn = -1;
-                        a_kill_b(px,py);
-                        occupied_a[px-1][py-1]=1;
                     }
                 }
-            }
-            if (z_val==0 && apawn[k][1] == 1 && (bking[0] != apawn[k][0] || bking[1] != apawn[k][1])) {
-                x_val = apawn[k][0];
-                apawn[k][2] = -1;
-                switcher = 1;
-                select = 0;
             }
         }
+        else
+        {
+            for(int i=0;i<a_pawn_count[k];i++)
+            {
+                if(px == a_pawn_moves[k][i][0] && py == a_pawn_moves[k][i][1])
+                {
+                    apawn[k][0]=px;
+                    apawn[k][1]=py;
+                    if(py1-py==2)
+                    {
+                        apawn[k][4]=1;
+                    }
+                    if(py1-py==1)
+                    {
+                        apawn[k][4]=-1;
+                    }
+                    is_a_pawn = -1;
+                    a_kill_b(px,py);
+                    occupied_a[px-1][py-1]=1;
+                }
+            }
+        }
+        if (z_val==0 && apawn[k][1] == 1 && (bking[0] != apawn[k][0] || bking[1] != apawn[k][1])) {
+            x_val = apawn[k][0];
+            apawn[k][2] = -1;
+            switcher = 1;
+            select = 0;
+        }
     }
+}
     public void a_bishop(int ind) {
         if (abishop[ind][2] == 0) {
             set();
@@ -3314,6 +3710,7 @@ public class C extends View {
                             occupied_a[apawn[i][0] - 1][apawn[i][1] - 1] = 0;
                             apawn[i][0] = ax + 1;
                             apawn[i][0] = ay - 1;
+                            a_kill_b(ax + 1, ay);
                             bpawn[k][2]=-1;
                             occupied_a[apawn[i][0] - 1][apawn[i][1] - 1] = 1;
                             if (increment())
@@ -6648,6 +7045,7 @@ public class C extends View {
                             occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 0;
                             bpawn[i][0] = ax + 1;
                             bpawn[i][0] = ay + 1;
+                            b_kill_a(ax + 1, ay);
                             apawn[k][2]=-1;
                             occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 1;
                             if (increment())
@@ -8011,12 +8409,12 @@ public class C extends View {
                 }
             }
             if (m != 0) {
-                if (m % 4 == 3) {
+                if (m % 4 == 3 && px != 0 && py != 0) {
                     p1.setColor(Color.parseColor("#933f51b5"));
                     p1.setStyle(Paint.Style.FILL);
                     canvas.drawRect(px * wr, py * hr, (px + 1) * wr, (py + 1) * hr, p1);
                 }
-                if (m % 4 == 1) {
+                if (m % 4 == 1 && px != 0 && py != 0) {
                     p1.setColor(Color.parseColor("#933f51b5"));
                     p1.setStyle(Paint.Style.FILL);
                     canvas.drawRect(px * wr, py * hr, (px + 1) * wr, (py + 1) * hr, p1);
@@ -8430,7 +8828,7 @@ public class C extends View {
                                 }
                             }
                             else
-                               {
+                            {
                                 while (z < b_pawn_count[ps]) {
                                     p_moves[z][0] = b_pawn_moves[ps][z][0];
                                     p_moves[z][1] = b_pawn_moves[ps][z][1];
