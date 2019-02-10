@@ -103,13 +103,12 @@ public class G extends View
     int a_knight_count[]=new int[9];
     int a_king_count=0;
 
-
     int king_a_moves[][] = new int[20][2];
     int queen_a_moves[][][] = new int [9][50][2];
     int bishop_a_moves[][][] = new int [9][50][2];
     int knight_a_moves[][][] = new int [9][50][2];
     int rook_a_moves[][][] = new int [9][50][2];
-    int pawn_a_moves[][][]= new int [8][10][3];//x,y,indication for en passant
+    int pawn_a_moves[][][]= new int [8][10][3];//3-x,y,indication for en passant
 
     int pawn_a_count[]=new int[8];
     int queen_a_count[]=new int[9];
@@ -165,7 +164,7 @@ public class G extends View
         public void run() {
             read();
             invalidate();
-            handler.postDelayed(this, 50);
+            handler.postDelayed(this, 100);
         }
     };
     public void init() {
@@ -383,7 +382,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 5; j++) {
+                    for (int j = 0; j <= 5; j++) {
                         apawn[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -398,7 +397,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 5; j++) {
+                    for (int j = 0; j <=5; j++) {
                         bpawn[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -413,7 +412,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 5; j++) {
+                    for (int j = 0; j <=5; j++) {
                         arook[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -428,7 +427,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 5; j++) {
+                    for (int j = 0; j <=5; j++) {
                         brook[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -443,7 +442,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j <=4; j++) {
                         aknight[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -458,7 +457,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j <=4; j++) {
                         bknight[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -473,7 +472,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j <=4; j++) {
                         abishop[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -488,7 +487,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j <=4; j++) {
                         bbishop[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -503,7 +502,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j <=4; j++) {
                         aqueen[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -518,7 +517,7 @@ public class G extends View
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
                 for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j <=4; j++) {
                         bqueen[i][j] = Integer.parseInt(String.valueOf(obj.data.get(i + " " + j)));
                     }
                 }
@@ -532,7 +531,7 @@ public class G extends View
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
-                for (int j = 0; j < 5; j++) {
+                for (int j = 0; j <=5; j++) {
                     aking[j] = Integer.parseInt(String.valueOf(obj.data.get(j + " ")));
                 }
             }
@@ -545,7 +544,7 @@ public class G extends View
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 obj.data = (HashMap<String, Integer>) dataSnapshot.child("data").getValue();
-                for (int j = 0; j < 5; j++) {
+                for (int j = 0; j <=5; j++) {
                     bking[j] = Integer.parseInt(String.valueOf(obj.data.get(j + " ")));
                 }
             }
@@ -564,7 +563,6 @@ public class G extends View
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -579,7 +577,6 @@ public class G extends View
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -589,7 +586,7 @@ public class G extends View
     public void write() {
         HashMap<String, Integer> hm = new HashMap<String, Integer>();
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j <= 5; j++) {
                 hm.put(i + " " + j, apawn[i][j]);
             }
         }
@@ -597,7 +594,7 @@ public class G extends View
         ref.child("apawn").setValue(obj);
         hm.clear();
         for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j <= 5; j++) {
                 hm.put(i + " " + j, bpawn[i][j]);
             }
         }
@@ -605,7 +602,7 @@ public class G extends View
         ref.child("bpawn").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j <= 5; j++) {
                 hm.put(i + " " + j, arook[i][j]);
             }
         }
@@ -613,7 +610,7 @@ public class G extends View
         ref.child("arook").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j <= 5; j++) {
                 hm.put(i + " " + j, brook[i][j]);
             }
         }
@@ -621,7 +618,7 @@ public class G extends View
         ref.child("brook").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j <= 4; j++) {
                 hm.put(i + " " + j, abishop[i][j]);
             }
         }
@@ -629,7 +626,7 @@ public class G extends View
         ref.child("abishop").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j <= 4; j++) {
                 hm.put(i + " " + j, bbishop[i][j]);
             }
         }
@@ -637,7 +634,7 @@ public class G extends View
         ref.child("bbishop").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j <= 4; j++) {
                 hm.put(i + " " + j, aknight[i][j]);
             }
         }
@@ -645,7 +642,7 @@ public class G extends View
         ref.child("aknight").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j <= 4; j++) {
                 hm.put(i + " " + j, bknight[i][j]);
             }
         }
@@ -653,7 +650,7 @@ public class G extends View
         ref.child("bknight").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j <= 4; j++) {
                 hm.put(i + " " + j, aqueen[i][j]);
             }
         }
@@ -661,20 +658,20 @@ public class G extends View
         ref.child("aqueen").setValue(obj);
         hm.clear();
         for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j <= 4; j++) {
                 hm.put(i + " " + j, bqueen[i][j]);
             }
         }
         obj.setData(hm);
         ref.child("bqueen").setValue(obj);
         hm.clear();
-        for (int j = 0; j < 5; j++) {
+        for (int j = 0; j <= 5; j++) {
             hm.put(j + " ", aking[j]);
         }
         obj.setData(hm);
         ref.child("aking").setValue(obj);
         hm.clear();
-        for (int j = 0; j < 5; j++) {
+        for (int j = 0; j <= 5; j++) {
             hm.put(j + " ", bking[j]);
         }
         obj.setData(hm);
@@ -697,8 +694,20 @@ public class G extends View
         ref.child("occupied_b").setValue(obj);
         hm.clear();
         obj.data.clear();
+
         ob.setM((int) m);
         ref.child("m").setValue(ob);
+        hm.clear();
+
+        if(a_check(aking[0],aking[1])==0) {
+            if (a_checkmate() != 0) {
+                for (int i = 0; i < 8; i++) {
+                    hm.put(i + " ", a_pawn_count[i]);
+                }
+                obj.setData(hm);
+                ref.child("a_pawn_count").setValue(obj);
+            }
+        }
     }
     public G(Context context) {
         super(context);
@@ -1117,7 +1126,6 @@ public class G extends View
     public void modulo_0()
     {
         a_count=0;//here
-        a_checkmate();
         for (int k = 0; k < 8; k++) {
             if (apawn[k][4] == 1)
                 apawn[k][4] = -1;//preventing en passant capture if not used immediately
@@ -1163,6 +1171,7 @@ public class G extends View
         }
         else
         {
+            a_checkmate();
             for (int k = 0; k < 8; k++) {
                 if (apawn[k][0] == px && apawn[k][1] == py && apawn[k][2] != -1 && apawn[k][5] == 1) {
                     reset();
@@ -1266,7 +1275,6 @@ public class G extends View
     public void modulo_2()
     {
         b_count=0;
-        b_checkmate();
         for(int k=0;k<8;k++)
         {
             if (bpawn[k][4] == 1)
@@ -1311,6 +1319,7 @@ public class G extends View
         }
         else
         {
+            b_checkmate();
             for (int k = 0; k < 8; k++) {
                 if (bpawn[k][0] == px && bpawn[k][1] == py && bpawn[k][2] != -1 && bpawn[k][5] == 1) {
                     reset();
@@ -1404,7 +1413,8 @@ public class G extends View
             occupied_a[px-1][py-1]=0;
             occupied_b[px1-1][py1-1]=0;
         }
-    }public void a_pawn(int k) {
+    }
+    public void a_pawn(int k) {
     if(apawn[k][2]==0) {
         pawn_a_count[k]=0;
         set();
@@ -3629,7 +3639,6 @@ public class G extends View
             return 1;
         }
     }
-    //soup
     int count1;
     int z;
     public int a_checkmate() {
@@ -3705,7 +3714,7 @@ public class G extends View
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(bpawn[k][0]==ax+1&&bpawn[k][1]==ay)
+                        if(bpawn[k][0]==ax+1&&bpawn[k][1]==ay&&bpawn[k][4]==1)
                         {
                             occupied_a[apawn[i][0] - 1][apawn[i][1] - 1] = 0;
                             apawn[i][0] = ax + 1;
@@ -3730,7 +3739,7 @@ public class G extends View
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(bpawn[k][0]==ax-1&&bpawn[k][1]==ay)
+                        if(bpawn[k][0]==ax-1&&bpawn[k][1]==ay&&bpawn[k][4]==1)
                         {
                             occupied_a[apawn[i][0] - 1][apawn[i][1] - 1] = 0;
                             apawn[i][0] = ax - 1;
@@ -4777,48 +4786,7 @@ public class G extends View
                 }
                 re_set();
             }
-                /*
-                //castling- Cannot be done when king in check
-                if(aking[4]==0) {
-                    if (arook[0][4] == 0 && arook[0][2] == 0) {
-                        for (int i = arook[0][0] + 1; i < aking[0]; i++) {
-                            if (occupied_a[i - 1][ay - 1] == 0 && occupied_b[i - 1][ay - 1] == 0 && a_check(i, ay) == 1) {
-                                qwe = 1;
-                            } else {
-                                qwe = -1;
-                                break;
-                            }
-                        }
-                        if (qwe == 1) {
-                            a_king_moves[a_king_count][0]=arook[0][0];
-                            a_king_moves[a_king_count][1]=aking[1];
-                            a_king_count++;
-                            z++;
-                            count1++;
-                            aking[5]=1;
-                            qwe = 0;
-                        }
-                    }
-                    if (arook[1][4] == 0 && arook[1][2] == 0) {
-                        for (int i = aking[0] + 1; i < arook[1][0]; i++) {
-                            if (occupied_a[i - 1][ay - 1] == 0 && occupied_b[i - 1][ay - 1] == 0 && a_check(i, ay) == 1) {
-                                qwe = 1;
-                            } else {
-                                qwe = -1;
-                                break;
-                            }
-                        }
-                        if (qwe == 1) {
-                            a_king_moves[a_king_count][0]=arook[1][0];
-                            a_king_moves[a_king_count][1]=aking[1];
-                            a_king_count++;
-                            z++;
-                            count1++;
-                            aking[5]=1;
-                            qwe=0;
-                        }
-                    }
-                }*/
+            //castling- Cannot be done when king in check
         }
         if(count1==0)
         {
@@ -7040,7 +7008,7 @@ public class G extends View
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(apawn[k][0]==ax+1&&apawn[k][1]==ay)
+                        if(apawn[k][0]==ax+1&&apawn[k][1]==ay&&apawn[k][4]==1)
                         {
                             occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 0;
                             bpawn[i][0] = ax + 1;
@@ -7065,7 +7033,7 @@ public class G extends View
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(apawn[k][0]==ax-1&&apawn[k][1]==ay)
+                        if(apawn[k][0]==ax-1&&apawn[k][1]==ay&&apawn[k][4]==1)
                         {
                             occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 0;
                             bpawn[i][0] = ax - 1;
@@ -8283,7 +8251,27 @@ public class G extends View
             Bitmap bb = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
             bm.recycle();
             //mark
-            if(m%4==2) {
+            if(m%4==2)
+            {
+                if (b_check(bking[0], bking[1]) == 0) {
+                    if (b_checkmate() == 0) {
+                        Intent intent = new Intent(c, D.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        c.startActivity(intent);
+                    }
+                }
+            }
+            if(m%4==0)
+            {
+                if (a_check(aking[0], aking[1]) == 0) {
+                    if (a_checkmate() == 0) {
+                        Intent intent = new Intent(c, D.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        c.startActivity(intent);
+                    }
+                }
+            }
+                if(m%4==2) {
                 if (bking[2] == -1) {
                     Intent i = new Intent(c, D.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -8325,21 +8313,6 @@ public class G extends View
                         c.startActivity(i);
                     }
                     z_val = 0;
-                }
-            }
-            if(m%4==0||m%4==2)
-            {
-                if(b_checkmate()==0)
-                {
-                    Intent i=new Intent(c,D.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    c.startActivity(i);
-                }
-                if(a_checkmate()==0)
-                {
-                    Intent i=new Intent(c,E.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    c.startActivity(i);
                 }
             }
             if(m%4==0) {
@@ -8409,12 +8382,12 @@ public class G extends View
                 }
             }
             if (m != 0) {
-                if (m % 4 == 3 && px != 0 && py != 0) {
+                if (m % 4 == 3 && px != 0 && py != 0 && is_b==1) {
                     p1.setColor(Color.parseColor("#933f51b5"));
                     p1.setStyle(Paint.Style.FILL);
                     canvas.drawRect(px * wr, py * hr, (px + 1) * wr, (py + 1) * hr, p1);
                 }
-                if (m % 4 == 1 && px != 0 && py != 0) {
+                if (m % 4 == 1 && px != 0 && py != 0 && is_a==1) {
                     p1.setColor(Color.parseColor("#933f51b5"));
                     p1.setStyle(Paint.Style.FILL);
                     canvas.drawRect(px * wr, py * hr, (px + 1) * wr, (py + 1) * hr, p1);
@@ -8644,11 +8617,7 @@ public class G extends View
                     p1.setColor(Color.RED);
                     p2.setColor(Color.parseColor("#d881e1ed"));
                     canvas.drawText("B king in CHECK",35 ,70,p1);
-                    if(b_checkmate() == 0)
-                    {
-                        p1.setColor(Color.RED);
-                        canvas.drawText("B king in CHECK-MATE",35 ,70,p1);
-                    }
+                    b_checkmate();
                     canvas.drawText(count1+" ",35 ,80,p1);
                     for(int i=0;i<bbc;i++)
                     {
@@ -8705,17 +8674,12 @@ public class G extends View
                     p1.setColor(Color.RED);
                     p2.setColor(Color.parseColor("#d881e1ed"));
                     canvas.drawText("A king in CHECK",35 ,70,p1);
+                    a_checkmate();
                     canvas.drawText(count1+" ",35,80,p1);
-                    for(int i=0;i<a_queen_count[0];i++)
-                        if(a_checkmate() == 0)
-                        {
-                            p1.setColor(Color.RED);
-                            canvas.drawText("A king in CHECK-MATE",35 ,70,p1);
-                        }
                     for(int i=0;i<abc;i++) {
                         if(abishop[i][2]==0)
                             canvas.drawText("ab " + a_bishop_count[i] + " ", 100, 80+10*i, p1);
-                        if(abishop[i][4]==1 && abishop[i][3]!=1)
+                        if(abishop[i][4]==1 && abishop[i][3]!=1)//herecra
                         {
                             canvas.drawRect(abishop[i][0] * wr, abishop[i][1] * hr, (abishop[i][0] + 1) * wr, (abishop[i][1] + 1) * hr, p2);
                         }
@@ -8733,7 +8697,6 @@ public class G extends View
                             canvas.drawRect(aqueen[i][0] * wr, aqueen[i][1] * hr, (aqueen[i][0] + 1) * wr, (aqueen[i][1] + 1) * hr, p2);
                         }
                     }
-
                     for(int i=0;i<8;i++) {
                         if(apawn[i][2]==0)
                             canvas.drawText("ap " + a_pawn_count[i] + " ", 400, 80+10*i, p1);
@@ -8768,7 +8731,6 @@ public class G extends View
                     int z = 0;
                     int k = 0;
                     int qs = -1;
-                    b_checkmate();
                     if(is_b_queen==1)
                     {
                         for (int i = 0; i < bqc; i++) {

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class E extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +23,8 @@ public class E extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                I obj=new I();
+                obj.operation();
                 finish();
                 System.exit(0);
             }

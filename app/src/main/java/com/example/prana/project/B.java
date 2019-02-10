@@ -11,6 +11,8 @@ public class B extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        H obj=new H();
+        obj.operation();
         setContentView(R.layout.activity_b);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         fg=new C(this);

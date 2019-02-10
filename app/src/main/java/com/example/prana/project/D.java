@@ -29,6 +29,8 @@ public class D extends AppCompatActivity {
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                I obj=new I();
+                obj.operation();
                 finish();
                 System.exit(0);
             }

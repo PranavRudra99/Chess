@@ -742,7 +742,6 @@ public class C extends View {
     public void modulo_0()
     {
         a_count=0;//here
-        a_checkmate();
         for (int k = 0; k < 8; k++) {
             if (apawn[k][4] == 1)
                 apawn[k][4] = -1;//preventing en passant capture if not used immediately
@@ -788,6 +787,7 @@ public class C extends View {
         }
         else
         {
+            a_checkmate();
             for (int k = 0; k < 8; k++) {
                 if (apawn[k][0] == px && apawn[k][1] == py && apawn[k][2] != -1 && apawn[k][5] == 1) {
                     reset();
@@ -880,7 +880,6 @@ public class C extends View {
     public void modulo_2()
     {
         b_count=0;
-        b_checkmate();
         for(int k=0;k<8;k++)
         {
             if (bpawn[k][4] == 1)
@@ -925,6 +924,7 @@ public class C extends View {
         }
         else
         {
+            b_checkmate();
             for (int k = 0; k < 8; k++) {
                 if (bpawn[k][0] == px && bpawn[k][1] == py && bpawn[k][2] != -1 && bpawn[k][5] == 1) {
                     reset();
@@ -3309,7 +3309,7 @@ public class C extends View {
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(bpawn[k][0]==ax+1&&bpawn[k][1]==ay)
+                        if(bpawn[k][0]==ax+1&&bpawn[k][1]==ay&&bpawn[k][4]==1)
                         {
                             occupied_a[apawn[i][0] - 1][apawn[i][1] - 1] = 0;
                             apawn[i][0] = ax + 1;
@@ -3333,7 +3333,7 @@ public class C extends View {
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(bpawn[k][0]==ax-1&&bpawn[k][1]==ay)
+                        if(bpawn[k][0]==ax-1&&bpawn[k][1]==ay&&bpawn[k][4]==1)
                         {
                             occupied_a[apawn[i][0] - 1][apawn[i][1] - 1] = 0;
                             apawn[i][0] = ax - 1;
@@ -6643,7 +6643,7 @@ public class C extends View {
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(apawn[k][0]==ax+1&&apawn[k][1]==ay)
+                        if(apawn[k][0]==ax+1&&apawn[k][1]==ay&&apawn[k][4]==1)
                         {
                             occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 0;
                             bpawn[i][0] = ax + 1;
@@ -6667,7 +6667,7 @@ public class C extends View {
                 {
                     for(int k=0;k<8;k++)
                     {
-                        if(apawn[k][0]==ax-1&&apawn[k][1]==ay)
+                        if(apawn[k][0]==ax-1&&apawn[k][1]==ay&&apawn[k][4]==1)
                         {
                             occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 0;
                             bpawn[i][0] = ax - 1;
@@ -7885,6 +7885,26 @@ public class C extends View {
             Bitmap bb = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
             bm.recycle();
             //mark
+            if(m%4==2)
+            {
+                if (b_check(bking[0], bking[1]) == 0) {
+                    if (b_checkmate() == 0) {
+                        Intent intent = new Intent(c, D.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        c.startActivity(intent);
+                    }
+                }
+            }
+            if(m%4==0)
+            {
+                if (a_check(aking[0], aking[1]) == 0) {
+                    if (b_checkmate() == 0) {
+                        Intent intent = new Intent(c, D.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        c.startActivity(intent);
+                    }
+                }
+            }
             if(m%4==2) {
                 if (bking[2] == -1) {
                     Intent i = new Intent(c, D.class);
@@ -7927,21 +7947,6 @@ public class C extends View {
                         c.startActivity(i);
                     }
                     z_val = 0;
-                }
-            }
-            if(m%4==0||m%4==2)
-            {
-                if(b_checkmate()==0)
-                {
-                    Intent i=new Intent(c,D.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    c.startActivity(i);
-                }
-                if(a_checkmate()==0)
-                {
-                    Intent i=new Intent(c,E.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    c.startActivity(i);
                 }
             }
             if(m%4==0) {
@@ -8246,11 +8251,7 @@ public class C extends View {
                     p1.setColor(Color.RED);
                     p2.setColor(Color.parseColor("#d881e1ed"));
                     canvas.drawText("B king in CHECK",35 ,70,p1);
-                    if(b_checkmate() == 0)
-                    {
-                        p1.setColor(Color.RED);
-                        canvas.drawText("B king in CHECK-MATE",35 ,70,p1);
-                    }
+                    b_checkmate();
                     canvas.drawText(count1+" ",35 ,80,p1);
                     for(int i=0;i<bbc;i++)
                     {
@@ -8307,13 +8308,8 @@ public class C extends View {
                     p1.setColor(Color.RED);
                     p2.setColor(Color.parseColor("#d881e1ed"));
                     canvas.drawText("A king in CHECK",35 ,70,p1);
+                    a_checkmate();
                     canvas.drawText(count1+" ",35,80,p1);
-                    for(int i=0;i<a_queen_count[0];i++)
-                        if(a_checkmate() == 0)
-                        {
-                            p1.setColor(Color.RED);
-                            canvas.drawText("A king in CHECK-MATE",35 ,70,p1);
-                        }
                     for(int i=0;i<abc;i++) {
                         if(abishop[i][2]==0)
                             canvas.drawText("ab " + a_bishop_count[i] + " ", 100, 80+10*i, p1);
