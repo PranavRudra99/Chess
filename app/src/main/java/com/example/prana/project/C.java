@@ -6582,7 +6582,7 @@ public class C extends View {
                     if ((ax > 0 && ay < 7) && occupied_a[ax - 1][ay] == 0 && occupied_a[ax - 1][ay + 1] == 0 && occupied_b[ax - 1][ay] == 0 && occupied_b[ax - 1][ay + 1] == 0) {
                         occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 0;
                         bpawn[i][1] = ay + 2;
-                        occupied_b[apawn[i][0] - 1][bpawn[i][1] - 1] = 1;
+                        occupied_b[bpawn[i][0] - 1][bpawn[i][1] - 1] = 1;
                         if (increment1()) {
                             b_pawn_moves[i][b_pawn_count[i]][0] = bpawn[i][0];
                             b_pawn_moves[i][b_pawn_count[i]][1] = bpawn[i][1];
