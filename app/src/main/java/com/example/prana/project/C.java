@@ -8003,11 +8003,11 @@ public class C extends View {
                     }
                 }
             }
-            p3.setColor(Color.parseColor("#66A09393"));
+            p3.setColor(Color.parseColor("#99707070"));
             for (int i = 0; i < 8; i++) {
                 if (bpawn[i][2] == 0) {
                     canvas.drawBitmap(bp, (bpawn[i][0]) * wr, (bpawn[i][1]) * hr, null);
-                    if(m%4==0||m%4==1)
+                    if(m%4==0)
                     {
                         canvas.drawRect((bpawn[i][0])*wr,(bpawn[i][1])*hr,(bpawn[i][0]+1)*wr,(bpawn[i][1]+1)*hr,p3);
                     }
@@ -8016,7 +8016,7 @@ public class C extends View {
             for (int i = 0; i < 8; i++) {
                 if (apawn[i][2] == 0) {
                     canvas.drawBitmap(ap, (apawn[i][0]) * wr, (apawn[i][1]) * hr, null);
-                    if(m%4==2||m%4==3)
+                    if(m%4==2)
                     {
                         canvas.drawRect((apawn[i][0])*wr,(apawn[i][1])*hr,(apawn[i][0]+1)*wr,(apawn[i][1]+1)*hr,p3);
                     }
@@ -8592,7 +8592,7 @@ public class C extends View {
             for(int i=0;i<arc;i++) {
                 if (arook[i][2] == 0) {
                     canvas.drawBitmap(ar, (arook[i][0]) * wr, (arook[i][1]) * hr, null);
-                    if(m%4==2||m%4==3)
+                    if(m%4==2)
                     {
                         canvas.drawRect((arook[i][0])*wr,(arook[i][1])*hr,(arook[i][0]+1)*wr,(arook[i][1]+1)*hr,p3);
                     }
@@ -8601,7 +8601,7 @@ public class C extends View {
             for(int i=0;i<brc;i++) {
                 if (brook[i][2] == 0) {
                     canvas.drawBitmap(br, (brook[i][0]) * wr, (brook[i][1]) * hr, null);
-                    if(m%4==0||m%4==1)
+                    if(m%4==0)
                     {
                         canvas.drawRect((brook[i][0])*wr,(brook[i][1])*hr,(brook[i][0]+1)*wr,(brook[i][1]+1)*hr,p3);
                     }
@@ -8610,7 +8610,7 @@ public class C extends View {
             for(int i=0;i<aknc;i++) {
                 if (aknight[i][2] == 0) {
                     canvas.drawBitmap(akn, (aknight[i][0]) * wr, (aknight[i][1]) * hr, null);
-                    if(m%4==2||m%4==3)
+                    if(m%4==2)
                     {
                         canvas.drawRect((aknight[i][0])*wr,(aknight[i][1])*hr,(aknight[i][0]+1)*wr,(aknight[i][1]+1)*hr,p3);
                     }
@@ -8619,7 +8619,7 @@ public class C extends View {
             for(int i=0;i<bknc;i++) {
                 if (bknight[i][2] == 0) {
                     canvas.drawBitmap(bkn, (bknight[i][0]) * wr, (bknight[i][1]) * hr, null);
-                    if(m%4==0||m%4==1)
+                    if(m%4==0)
                     {
                         canvas.drawRect((bknight[i][0])*wr,(bknight[i][1])*hr,(bknight[i][0]+1)*wr,(bknight[i][1]+1)*hr,p3);
                     }
@@ -8628,7 +8628,7 @@ public class C extends View {
             for(int i=0;i<abc;i++) {
                 if (abishop[i][2] == 0) {
                     canvas.drawBitmap(ab, (abishop[i][0]) * wr, (abishop[i][1]) * hr, null);
-                    if(m%4==2||m%4==3)
+                    if(m%4==2)
                     {
                         canvas.drawRect((abishop[i][0])*wr,(abishop[i][1])*hr,(abishop[i][0]+1)*wr,(abishop[i][1]+1)*hr,p3);
                     }
@@ -8637,7 +8637,7 @@ public class C extends View {
             for(int i=0;i<bbc;i++) {
                 if (bbishop[i][2] == 0) {
                     canvas.drawBitmap(bb, (bbishop[i][0]) * wr, (bbishop[i][1]) * hr, null);
-                    if(m%4==0||m%4==1)
+                    if(m%4==0)
                     {
                         canvas.drawRect((bbishop[i][0])*wr,(bbishop[i][1])*hr,(bbishop[i][0]+1)*wr,(bbishop[i][1]+1)*hr,p3);
                     }
@@ -8646,7 +8646,7 @@ public class C extends View {
             for(int i=0;i<aqc;i++) {
                 if (aqueen[i][2] == 0) {
                     canvas.drawBitmap(aq, aqueen[i][0] * wr, aqueen[i][1] * hr, null);
-                    if(m%4==2||m%4==3)
+                    if(m%4==2)
                     {
                         canvas.drawRect((aqueen[i][0])*wr,(aqueen[i][1])*hr,(aqueen[i][0]+1)*wr,(aqueen[i][1]+1)*hr,p3);
                     }
@@ -8656,7 +8656,7 @@ public class C extends View {
 
                 if (bqueen[i][2] == 0) {
                     canvas.drawBitmap(bq, bqueen[i][0] * wr, bqueen[i][1] * hr, null);
-                    if(m%4==0||m%4==1)
+                    if(m%4==0)
                     {
                         canvas.drawRect((bqueen[i][0])*wr,(bqueen[i][1])*hr,(bqueen[i][0]+1)*wr,(bqueen[i][1]+1)*hr,p3);
                     }
@@ -8664,19 +8664,18 @@ public class C extends View {
             }
             if (aking[2] == 0) {
                 canvas.drawBitmap(ak, aking[0] * wr, aking[1] * hr, null);
-                if(m%4==2||m%4==3)
+                if(m%4==2)
                 {
                     canvas.drawRect((aking[0])*wr,(aking[1])*hr,(aking[0]+1)*wr,(aking[1]+1)*hr,p3);
                 }
             }
             if (bking[2] == 0) {
                 canvas.drawBitmap(bk, bking[0] * wr, bking[1] * hr, null);
-                if(m%4==0||m%4==1)
+                if(m%4==0)
                 {
                     canvas.drawRect((bking[0])*wr,(bking[1])*hr,(bking[0]+1)*wr,(bking[1]+1)*hr,p3);
                 }
             }
         }
     }
-
 }
