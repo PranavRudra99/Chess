@@ -1453,11 +1453,11 @@ public class G extends View
             //en passant
             if (x < 8 && y > 0 && occupied_b[x][y - 1] == 1) {
                 for (int i = 0; i < 8; i++) {
-                    if (bpawn[i][0] == x + 1 && bpawn[i][1] == y && bpawn[i][4] == 1) {
+                    if (bpawn[i][0] == x + 1 && bpawn[i][1] == y && bpawn[i][4] == 1 && bpawn[i][2]==0) {
                         occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
                         apawn[k][0]=x+1;
                         apawn[k][1]=y-1;
-                        bpawn[i][2]=-1;
+                        a_kill_b(x+1,y);
                         occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
                         if(a_check(aking[0],aking[1])==1)
                         {
@@ -1473,11 +1473,11 @@ public class G extends View
             }
             if (x > 1 && y > 0 && occupied_b[x - 2][y - 1] == 1) {
                 for (int i = 0; i < 8; i++) {
-                    if (bpawn[i][0] == x - 1 && bpawn[i][1] == y && bpawn[i][4] == 1) {
+                    if (bpawn[i][0] == x - 1 && bpawn[i][1] == y && bpawn[i][4] == 1 && bpawn[i][2]==0) {
                         occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 0;
                         apawn[k][0]=x-1;
                         apawn[k][1]=y-1;
-                        bpawn[i][2]=-1;
+                        a_kill_b(x-1,y);
                         occupied_a[apawn[k][0]-1][apawn[k][1]-1] = 1;
                         if(a_check(aking[0],aking[1])==1)
                         {
@@ -4832,7 +4832,7 @@ public class G extends View
                 }
                 if (x < 8 && y > 0 && occupied_a[x][y - 1] == 1) {
                     for (int i = 0; i < 8; i++) {
-                        if (apawn[i][0] == x + 1 && apawn[i][1] == y && apawn[i][4] == 1) {
+                        if (apawn[i][0] == x + 1 && apawn[i][1] == y && apawn[i][4] == 1 && apawn[i][2]==0) {
                             occupied_b[bpawn[k][0] - 1][bpawn[k][1] - 1] = 0;
                             bpawn[k][0] = x + 1;
                             bpawn[k][1] = y + 1;
@@ -4851,7 +4851,7 @@ public class G extends View
                 }
                 if (x > 1 && y > 0 && occupied_a[x - 2][y - 1] == 1) {
                     for (int i = 0; i < 8; i++) {
-                        if (apawn[i][0] == x - 1 && apawn[i][1] == y && apawn[i][4] == 1) {
+                        if (apawn[i][0] == x - 1 && apawn[i][1] == y && apawn[i][4] == 1 && apawn[i][2]==0) {
                             occupied_b[bpawn[k][0] - 1][bpawn[k][1] - 1] = 0;
                             bpawn[k][0] = x - 1;
                             bpawn[k][1] = y + 1;
@@ -8456,7 +8456,7 @@ public class G extends View
                                 while (z < pawn_a_count[ps]) {
                                     p_moves[z][0] = pawn_a_moves[ps][z][0];
                                     p_moves[z][1] = pawn_a_moves[ps][z][1];
-                                    p_moves[z][2] = a_pawn_moves[ps][z][2];
+                                    p_moves[z][2] = pawn_a_moves[ps][z][2];
                                     z++;
                                 }
                             }
@@ -8472,7 +8472,7 @@ public class G extends View
                             while (z > -1) {
                                 if ((p_moves[z][0] != 0 && p_moves[z][1] != 0) && occupied_b[p_moves[z][0] - 1][p_moves[z][1] - 1] == 0 && p_moves[z][2] == 0) {
                                     canvas.drawRect(p_moves[z][0] * wr, p_moves[z][1] * hr, (p_moves[z][0] + 1) * wr, (p_moves[z][1] + 1) * hr, p1);
-                                } else if ((p_moves[z][0] != 0 && p_moves[z][1] != 0) && (occupied_b[p_moves[z][0] - 1][p_moves[z][1] - 1] == 1)|| p_moves[z][2] == 1) {
+                                } else if ((p_moves[z][0] != 0 && p_moves[z][1] != 0) && (occupied_b[p_moves[z][0] - 1][p_moves[z][1] - 1] == 1|| p_moves[z][2] == 1)) {
                                     canvas.drawRect(p_moves[z][0] * wr, p_moves[z][1] * hr, (p_moves[z][0] + 1) * wr, (p_moves[z][1] + 1) * hr, p2);
                                 }
                                 z--;
