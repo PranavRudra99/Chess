@@ -8622,106 +8622,97 @@ public class G extends View
                     canvas.drawText("B king in CHECK",35 ,70,p1);
                     b_checkmate();
                     canvas.drawText(count1+" ",35 ,80,p1);
-                    for(int i=0;i<bbc;i++)
+                    if(is_b==1)
                     {
-                        if (bbishop[i][2] == 0)
-                        {
-                            canvas.drawText("bb " + b_bishop_count[i] + " ", 100, 80 + 10 * i, p1);
+                        for (int i = 0; i < bbc; i++) {
+                            if (bbishop[i][2] == 0) {
+                                canvas.drawText("bb " + b_bishop_count[i] + " ", 100, 80 + 10 * i, p1);
+                            }
+                            if (bbishop[i][4] == 1 && bbishop[i][3] != 1) {
+                                canvas.drawRect(bbishop[i][0] * wr, bbishop[i][1] * hr, (bbishop[i][0] + 1) * wr, (bbishop[i][1] + 1) * hr, p2);
+                            }
                         }
-                        if(bbishop[i][4]==1 && bbishop[i][3]!=1)
-                        {
-                            canvas.drawRect(bbishop[i][0] * wr, bbishop[i][1] * hr, (bbishop[i][0] + 1) * wr, (bbishop[i][1] + 1) * hr, p2);
+                        canvas.drawText("bki " + b_king_count + " ", 200, 80, p1);
+                        if (bking[5] == 1 && bking[3] != 1) {
+                            canvas.drawRect(bking[0] * wr, bking[1] * hr, (bking[0] + 1) * wr, (bking[1] + 1) * hr, p2);
                         }
-                    }
-                    canvas.drawText("bki "+b_king_count+" ",200 ,80,p1);
-                    if(bking[5]==1 && bking[3]!=1)
-                    {
-                        canvas.drawRect(bking[0] * wr, bking[1] * hr, (bking[0] + 1) * wr, (bking[1] + 1) * hr, p2);
-                    }
-                    for(int i=0;i<bqc;i++) {
-                        if(bqueen[i][2]==0)
-                            canvas.drawText("bq " + b_queen_count[i] + " ", 300, 80+10*i, p1);
-                        if(bqueen[i][4]==1 && bqueen[i][3]!=1)
-                        {
-                            canvas.drawRect(bqueen[i][0] * wr, bqueen[i][1] * hr, (bqueen[i][0] + 1) * wr, (bqueen[i][1] + 1) * hr, p2);
+                        for (int i = 0; i < bqc; i++) {
+                            if (bqueen[i][2] == 0)
+                                canvas.drawText("bq " + b_queen_count[i] + " ", 300, 80 + 10 * i, p1);
+                            if (bqueen[i][4] == 1 && bqueen[i][3] != 1) {
+                                canvas.drawRect(bqueen[i][0] * wr, bqueen[i][1] * hr, (bqueen[i][0] + 1) * wr, (bqueen[i][1] + 1) * hr, p2);
+                            }
                         }
-                    }
-
-                    for(int i=0;i<8;i++) {
-                        if(bpawn[i][2]==0)
-                            canvas.drawText("bp " + b_pawn_count[i] + " ", 400, 80+10*i, p1);
-                        if(bpawn[i][5]==1 && bpawn[i][3]!=1)
-                        {
-                            canvas.drawRect(bpawn[i][0] * wr, bpawn[i][1] * hr, (bpawn[i][0] + 1) * wr, (bpawn[i][1] + 1) * hr, p2);
+                        for (int i = 0; i < 8; i++) {
+                            if (bpawn[i][2] == 0)
+                                canvas.drawText("bp " + b_pawn_count[i] + " ", 400, 80 + 10 * i, p1);
+                            if (bpawn[i][5] == 1 && bpawn[i][3] != 1) {
+                                canvas.drawRect(bpawn[i][0] * wr, bpawn[i][1] * hr, (bpawn[i][0] + 1) * wr, (bpawn[i][1] + 1) * hr, p2);
+                            }
                         }
-                    }
-                    for(int i=0;i<bknc;i++) {
-                        if(bknight[i][2]==0)
-                            canvas.drawText("bkn " + b_knight_count[i] + " ", 500, 80+10*i, p1);
-                        if(bknight[i][4]==1 && bknight[i][3]!=1)
-                        {
-                            canvas.drawRect(bknight[i][0] * wr, bknight[i][1] * hr, (bknight[i][0] + 1) * wr, (bknight[i][1] + 1) * hr, p2);
+                        for (int i = 0; i < bknc; i++) {
+                            if (bknight[i][2] == 0)
+                                canvas.drawText("bkn " + b_knight_count[i] + " ", 500, 80 + 10 * i, p1);
+                            if (bknight[i][4] == 1 && bknight[i][3] != 1) {
+                                canvas.drawRect(bknight[i][0] * wr, bknight[i][1] * hr, (bknight[i][0] + 1) * wr, (bknight[i][1] + 1) * hr, p2);
+                            }
                         }
-                    }
-                    for(int i=0;i<brc;i++) {
-                        if(brook[i][2]==0)
-                            canvas.drawText("br " + b_rook_count[i] + " ", 600, 80+10*i, p1);
-                        if(brook[i][5]==1 && brook[i][3]!=1)
-                        {
-                            canvas.drawRect(brook[i][0] * wr, brook[i][1] * hr, (brook[i][0] + 1) * wr, (brook[i][1] + 1) * hr, p2);
+                        for (int i = 0; i < brc; i++) {
+                            if (brook[i][2] == 0)
+                                canvas.drawText("br " + b_rook_count[i] + " ", 600, 80 + 10 * i, p1);
+                            if (brook[i][5] == 1 && brook[i][3] != 1) {
+                                canvas.drawRect(brook[i][0] * wr, brook[i][1] * hr, (brook[i][0] + 1) * wr, (brook[i][1] + 1) * hr, p2);
+                            }
                         }
                     }
                 }
-                if(a_check(aking[0],aking[1])==0)
+                if(a_check(aking[0],aking[1])==0 )
                 {
                     p1.setColor(Color.RED);
                     p2.setColor(Color.parseColor("#d881e1ed"));
                     canvas.drawText("A king in CHECK",35 ,70,p1);
                     a_checkmate();
                     canvas.drawText(count1+" ",35,80,p1);
-                    for(int i=0;i<abc;i++) {
-                        if(abishop[i][2]==0)
-                            canvas.drawText("ab " + a_bishop_count[i] + " ", 100, 80+10*i, p1);
-                        if(abishop[i][4]==1 && abishop[i][3]!=1)//herecra
-                        {
-                            canvas.drawRect(abishop[i][0] * wr, abishop[i][1] * hr, (abishop[i][0] + 1) * wr, (abishop[i][1] + 1) * hr, p2);
-                        }
-                    }
-                    canvas.drawText("aki "+a_king_count+" ",200 ,80,p1);
-                    if(aking[5]==1 && aking[3]!=1)
+                    if(is_a==1)
                     {
-                        canvas.drawRect(aking[0] * wr, aking[1] * hr, (aking[0] + 1) * wr, (aking[1] + 1) * hr, p2);
-                    }
-                    for(int i=0;i<aqc;i++) {
-                        if(aqueen[i][2]==0)
-                            canvas.drawText("aq " + a_queen_count[i] + " ", 300, 80+10*i, p1);
-                        if(aqueen[i][4]==1 && aqueen[i][3]!=1)
-                        {
-                            canvas.drawRect(aqueen[i][0] * wr, aqueen[i][1] * hr, (aqueen[i][0] + 1) * wr, (aqueen[i][1] + 1) * hr, p2);
+                        for (int i = 0; i < abc; i++) {
+                            if (abishop[i][2] == 0)
+                                canvas.drawText("ab " + a_bishop_count[i] + " ", 100, 80 + 10 * i, p1);
+                            if (abishop[i][4] == 1 && abishop[i][3] != 1) {
+                                canvas.drawRect(abishop[i][0] * wr, abishop[i][1] * hr, (abishop[i][0] + 1) * wr, (abishop[i][1] + 1) * hr, p2);
+                            }
                         }
-                    }
-                    for(int i=0;i<8;i++) {
-                        if(apawn[i][2]==0)
-                            canvas.drawText("ap " + a_pawn_count[i] + " ", 400, 80+10*i, p1);
-                        if(apawn[i][5]==1 && apawn[i][3]!=1)
-                        {
-                            canvas.drawRect(apawn[i][0] * wr, apawn[i][1] * hr, (apawn[i][0] + 1) * wr, (apawn[i][1] + 1) * hr, p2);
+                        canvas.drawText("aki " + a_king_count + " ", 200, 80, p1);
+                        if (aking[5] == 1 && aking[3] != 1) {
+                            canvas.drawRect(aking[0] * wr, aking[1] * hr, (aking[0] + 1) * wr, (aking[1] + 1) * hr, p2);
                         }
-                    }
-                    for(int i=0;i<aknc;i++) {
-                        if(aknight[i][2]==0)
-                            canvas.drawText("akn " + a_knight_count[i] + " ", 500, 80+10*i, p1);
-                        if(aknight[i][4]==1 && aknight[i][3]!=1)
-                        {
-                            canvas.drawRect(aknight[i][0] * wr, aknight[i][1] * hr, (aknight[i][0] + 1) * wr, (aknight[i][1] + 1) * hr, p2);
+                        for (int i = 0; i < aqc; i++) {
+                            if (aqueen[i][2] == 0)
+                                canvas.drawText("aq " + a_queen_count[i] + " ", 300, 80 + 10 * i, p1);
+                            if (aqueen[i][4] == 1 && aqueen[i][3] != 1) {
+                                canvas.drawRect(aqueen[i][0] * wr, aqueen[i][1] * hr, (aqueen[i][0] + 1) * wr, (aqueen[i][1] + 1) * hr, p2);
+                            }
                         }
-                    }
-                    for(int i=0;i<arc;i++) {
-                        if(arook[i][2]==0)
-                            canvas.drawText("ar " + a_rook_count[i] + " ", 600, 80+10*i, p1);
-                        if(arook[i][5]==1 && arook[i][3]!=1)
-                        {
-                            canvas.drawRect(arook[i][0] * wr, arook[i][1] * hr, (arook[i][0] + 1) * wr, (arook[i][1] + 1) * hr, p2);
+                        for (int i = 0; i < 8; i++) {
+                            if (apawn[i][2] == 0)
+                                canvas.drawText("ap " + a_pawn_count[i] + " ", 400, 80 + 10 * i, p1);
+                            if (apawn[i][5] == 1 && apawn[i][3] != 1) {
+                                canvas.drawRect(apawn[i][0] * wr, apawn[i][1] * hr, (apawn[i][0] + 1) * wr, (apawn[i][1] + 1) * hr, p2);
+                            }
+                        }
+                        for (int i = 0; i < aknc; i++) {
+                            if (aknight[i][2] == 0)
+                                canvas.drawText("akn " + a_knight_count[i] + " ", 500, 80 + 10 * i, p1);
+                            if (aknight[i][4] == 1 && aknight[i][3] != 1) {
+                                canvas.drawRect(aknight[i][0] * wr, aknight[i][1] * hr, (aknight[i][0] + 1) * wr, (aknight[i][1] + 1) * hr, p2);
+                            }
+                        }
+                        for (int i = 0; i < arc; i++) {
+                            if (arook[i][2] == 0)
+                                canvas.drawText("ar " + a_rook_count[i] + " ", 600, 80 + 10 * i, p1);
+                            if (arook[i][5] == 1 && arook[i][3] != 1) {
+                                canvas.drawRect(arook[i][0] * wr, arook[i][1] * hr, (arook[i][0] + 1) * wr, (arook[i][1] + 1) * hr, p2);
+                            }
                         }
                     }
                 }
