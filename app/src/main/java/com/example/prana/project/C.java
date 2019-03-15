@@ -45,6 +45,7 @@ public class C extends View {
     int bking[] = new int[6];
     int bqueen[][] = new int[10][5];
 
+    Bitmap back1,back,ap,bp,akn,bkn,aq,bq,ak,bk,ar,br,ab,bb;
 
     int t_apawn[][]=new int[8][5];
     int t_aqueen[][]=new int[10][4];
@@ -331,6 +332,158 @@ public class C extends View {
             bqueen[i][2]=-1;
             bqueen[i][4]=-1;
         }
+        Resources r = getResources();
+        Bitmap bm = BitmapFactory.decodeResource(r, R.drawable.backgr);
+        int width=bm.getWidth();
+        int height=bm.getHeight();
+        Matrix matrix=new Matrix();
+        float scalewidth ;
+        float scaleheight;
+        if(width>0&&height>0) {
+            scalewidth = w / width;
+            scaleheight = h / height;
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        back1 = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        if(bm!=null)
+        {
+            bm.recycle();
+            bm=null;
+        }
+        bm = BitmapFactory.decodeResource(r, R.drawable.apawn);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        matrix=new Matrix();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        ap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.bpawn);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        bp = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.aking);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        ak = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.bking);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        bk = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.aqueen);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        aq = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.bqueen);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        bq = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.aknight);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        akn = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.bknight);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        bkn = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.arook);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        ar = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.brook);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        br = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.abishop);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        ab = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        bm = BitmapFactory.decodeResource(r, R.drawable.bbishop);
+        width = bm.getWidth();
+        height = bm.getHeight();
+        if(width>0&&height>0) {
+            scalewidth = wx / width;
+            scaleheight = hx / height;
+            matrix = new Matrix();
+            matrix.postScale(scalewidth, scaleheight);
+        }
+        bb = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
     }
 
     public C(Context context) {
@@ -7709,26 +7862,7 @@ public class C extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if(switcher==1) {
-            int x,y;
-            Resources r = getResources();
-            Bitmap bm = BitmapFactory.decodeResource(r, R.drawable.backgr);
-            int width=bm.getWidth();
-            int height=bm.getHeight();
-            Matrix matrix=new Matrix();
-            float scalewidth ;
-            float scaleheight;
-            if(width>0&&height>0) {
-                scalewidth = w / width;
-                scaleheight = h / height;
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap back = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            if(bm!=null)
-            {
-                bm.recycle();
-                bm=null;
-            }
-            canvas.drawBitmap(back,0,0,null);
+            canvas.drawBitmap(back1,0,0,null);
         }
         if(switcher==0)
         {
@@ -7744,143 +7878,8 @@ public class C extends View {
                 scaleheight = h / height;
                 matrix.postScale(scalewidth, scaleheight);
             }
-            Bitmap back = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+            back = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
             canvas.drawBitmap(back,0,0,null);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.apawn);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            matrix=new Matrix();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap ap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.bpawn);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap bp = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.aking);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap ak = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.bking);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap bk = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.aqueen);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap aq = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.bqueen);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap bq = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.aknight);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap akn = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.bknight);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap bkn = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.arook);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap ar = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.brook);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap br = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.abishop);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap ab = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
-            bm = BitmapFactory.decodeResource(r, R.drawable.bbishop);
-            width = bm.getWidth();
-            height = bm.getHeight();
-            if(width>0&&height>0) {
-                scalewidth = wx / width;
-                scaleheight = hx / height;
-                matrix = new Matrix();
-                matrix.postScale(scalewidth, scaleheight);
-            }
-            Bitmap bb = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-            bm.recycle();
             //mark
             if(m%4==2)
             {
